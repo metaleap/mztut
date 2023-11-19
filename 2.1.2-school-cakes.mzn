@@ -1,9 +1,9 @@
 % Baking cakes for the school fete
 
-% objective: find how many banana and chocolate can be baked given current conditions
+% objective: find how many banana and chocolate cakes can one bake given current conditions
 var 0..: num_banana_cakes;
 var 0..: num_choc_cakes;
-% current-conditions follow (would in-the-real-world come from data file or input prompts)
+% and the current-conditions follow below (would in-the-real-world come from data file or input prompts)
 
 % recipe: banana cake
 int: cakeBanaFlourGrams = 250;
