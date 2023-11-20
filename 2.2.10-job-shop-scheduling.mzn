@@ -14,15 +14,11 @@ var 0..sumOfTaskDurations: dtEnd;
 
 
 constraint % ensure the machines occur in sequence
-    forall(job in Job) (
-        forall(machine in Machine where machine < maxMachine) 
-            (dtTaskStart[job,machine] + taskDurations[job,machine] <= dtTaskStart[job,enum_next(Machine,machine)])  /\  (dtTaskStart[job,maxMachine] + taskDurations[job,maxMachine] <= dtEnd));
+  forall(job in Job, machine in Machine where machine < maxMachine) (
+    (dtTaskStart[job,machine] + taskDurations[job,machine] <= dtTaskStart[job,enum_next(Machine,machine)])  /\  (dtTaskStart[job,maxMachine] + taskDurations[job,maxMachine] <= dtEnd));
 
 constraint % ensure no overlap of machines
-    forall(machine in Machine) (
-        forall(jobA,jobB in Job where jobA < jobB) (
-            (dtTaskStart[jobA,machine] + taskDurations[jobA,machine] <= dtTaskStart[jobB,machine])  \/  (dtTaskStart[jobB,machine] + taskDurations[jobB,machine] <= dtTaskStart[jobA,machine])
-        )
-    );
+  forall(machine in Machine, jobA,jobB in Job where jobA < jobB) (
+    (dtTaskStart[jobA,machine] + taskDurations[jobA,machine] <= dtTaskStart[jobB,machine])  \/  (dtTaskStart[jobB,machine] + taskDurations[jobB,machine] <= dtTaskStart[jobA,machine]));
 
 solve minimize dtEnd;
