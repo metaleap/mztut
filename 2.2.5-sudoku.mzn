@@ -25,7 +25,10 @@ constraint forall(row in 1..puzzleSize) (alldifferent([ puzzleSolved[row,col] | 
 % likewise, none in any column
 constraint forall(col in 1..puzzleSize) (alldifferent([ puzzleSolved[row,col] | row in 1..puzzleSize ]));
 % also, none in any sub-square
-constraint forall(sqr, sqc in 1..subSquareSize)(alldifferent([ puzzleSolved[ (sqr-1)*subSquareSize + sqrcell, (sqc-1)*subSquareSize + sqccell ]
+constraint forall(sqr, sqc in 1..subSquareSize)(alldifferent([ puzzleSolved[ posN(sqr, sqrcell), posN(sqc, sqccell) ]
                                                                | sqrcell, sqccell in 1..subSquareSize ]));
+
+function int: posN(int: a, int: a1) =
+  ((a-1) * subSquareSize) + a1;
 
 solve satisfy;
