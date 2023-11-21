@@ -19,6 +19,9 @@ constraint % ensure the machines occur in sequence
 
 constraint % ensure no overlap of machines
   forall(machine in Machine, jobA,jobB in Job where jobA < jobB) (
-    (dtTaskStart[jobA,machine] + taskDurations[jobA,machine] <= dtTaskStart[jobB,machine])  \/  (dtTaskStart[jobB,machine] + taskDurations[jobB,machine] <= dtTaskStart[jobA,machine]));
+    noOverlap(dtTaskStart[jobA,machine], taskDurations[jobA,machine], dtTaskStart[jobB,machine], taskDurations[jobB,machine]));
+
+predicate noOverlap(var int: timeStart1, int: duration1, var int: timeStart2, int: duration2) =
+  ((timeStart1 + duration1) <= timeStart2)  \/  ((timeStart2 + duration2) <= timeStart1);
 
 solve minimize dtEnd;
