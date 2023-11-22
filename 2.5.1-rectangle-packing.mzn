@@ -1,3 +1,5 @@
+include "ide/vis.mzn";
+
 type Size = record(0..infinity: width, 0..infinity: height);
 type Pos = record(var 0..infinity: x, var 0..infinity: y);
 type Rect = Size ++ Pos;

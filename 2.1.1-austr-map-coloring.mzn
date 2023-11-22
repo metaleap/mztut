@@ -1,5 +1,7 @@
 % Colouring Australia using num_colors colours
 
+include "ide/vis.mzn";
+
 3..: num_colors; % not-specified-here param raises input prompt (or reads from data file)
 
 var 1..num_colors: col_wa;
