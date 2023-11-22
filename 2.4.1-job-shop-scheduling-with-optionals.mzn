@@ -19,7 +19,7 @@ array[Task] of var minDuration..maxDuration: taskDuration;
 array[Task,Machine] of var opt Time: taskStartMaybe; % optional task start
 
 constraint forall(task in Task) (
-  alternative(taskStart[task], taskDuration[task], [taskStartMaybe[task,mach] | mach in Machine], [taskDurationByMachine[task, mach] | mach in Machine]));
+  alternative(taskStart[task], taskDuration[task], [taskStartMaybe[task,mach] | mach in Machine], [taskDurationByMachine[task,mach] | mach in Machine]));
 
 constraint forall(mach in Machine)
   (disjunctive([taskStartMaybe[task,mach] | task in Task], [taskDurationByMachine[task,mach] | task in Task]));
